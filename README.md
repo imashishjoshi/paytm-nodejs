@@ -9,7 +9,7 @@ $ npm install paytm-nodejs --save
 
 ## Usage
 
-###For Creating Paytm Payment
+### For Creating Paytm Payment
 
 ```js
 const paytm = require('paytm-nodejs')
@@ -85,3 +85,25 @@ exports.pay = function(req,res){
 	});
 }
 ```
+
+### For Validating Paytm Payment
+
+```js
+const paytm = require('paytm-nodejs')
+
+const config = {
+	MID : '###############', // Get this from Paytm console
+	KEY : '###############', // Get this from Paytm console
+	ENV : 'dev', // 'dev' for development, 'prod' for production
+	CHANNEL_ID : 'WAP',
+	INDUSTRY : 'Retail',  
+	WEBSITE : 'Default',
+	CALLBACK_URL : 'localhost:8080/paytm/webhook',  // webhook url for verifying payment
+}
+
+// Webhook controller function
+exports.webhook = function(req,res){ 
+
+}
+```
+
