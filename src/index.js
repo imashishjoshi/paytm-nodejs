@@ -71,10 +71,10 @@
  */
  exports.status = (config,data,callback) => {
 
- 	checksum_lib.genchecksum({ 'MID' : config.mid, 'ORDERID' : data },config.KEY, (err, checksum) =>{
+ 	checksum_lib.genchecksum({ 'MID' : config.MID, 'ORDERID' : data },config.KEY, (err, checksum) =>{
 
  		let post_data = {
- 			MID:config.mid,
+ 			MID:config.MID,
  			ORDERID:data,
  			CHECKSUMHASH: checksum
  		};
