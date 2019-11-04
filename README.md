@@ -13,23 +13,24 @@ For creatin Payment
 
 ```js
 const paytm = require('paytm-nodejs')
+
 const config = {
-	mid : '###############',
-	key : '###############',
-	env : 'dev' // 'dev' for development, 'prod' for production
+	MID : '###############', // Get this from Paytm console
+	KEY : '###############', // Get this from Paytm console
+	ENV : 'dev', // 'dev' for development, 'prod' for production
+	CHANNEL_ID : 'WAP',
+	INDUSTRY : 'Retail',  
+	WEBSITE : 'Default',
+	CALLBACK_URL : 'localhost:8080/paytm/webhook',  // webhook url for verifying payment
 }
 
 // your create payment controller function
 exports.pay = function(req,res){ 
 
 	let data = {
-		TXN_AMOUNT : req.body.amount, // request amount 
-		CALLBACK_URL : 'localhost:8080/paytm/webhook',  // webhook url for verify payment
-		CHANNEL_ID : 'WAP',
-		ORDER_ID : '1234564',
-		CUST_ID : 'Userid123',
-		INDUSTRY : 'Retail',  
-		WEBSITE : 'Default',
+		TXN_AMOUNT : req.body.amount, // request amount
+		ORDER_ID : 'ORDER_123456', // any unique order id 
+		CUST_ID : 'CUST_123456' // any unique customer id		
 	}
 
 	// create Paytm Payment
