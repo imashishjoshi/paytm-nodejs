@@ -133,13 +133,18 @@ const config = {
 }
 
 
-	paytm.status(config,'your_order_id',function(err,data){
-		if(err){
-			// handle err
-		}
+paytm.status(config,'your_order_id',function(err,data){
+	if(err){
+	// handle err
+	}
 
-		// data will contain order details
-	})
+	// data will contain order details
+});
 
 ```
+
+
+## Licence
+
+MIT
 
