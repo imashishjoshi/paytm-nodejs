@@ -13,23 +13,23 @@
  exports.createPayment = (config,obj,callback) => {
 
  	let paytmParams = {
- 		"MID" : config.mid,
- 		"WEBSITE" : obj.WEBSITE || 'DEFAULT',
- 		"CHANNEL_ID" : obj.CHANNEL_ID || 'WAP',
+ 		"MID" : config.MID,
+ 		"WEBSITE" : config.WEBSITE || 'DEFAULT',
+ 		"CHANNEL_ID" : config.CHANNEL_ID || 'WAP',
  		"ORDER_ID" : obj.ORDER_ID || 'ORDER_'  + new Date().getTime(),
  		"CUST_ID" : obj.CUST_ID || 'CUST_'  + new Date().getTime(),
  		"TXN_AMOUNT" : obj.TXN_AMOUNT.toString(),
- 		"CALLBACK_URL" : obj.CALLBACK_URL,
- 		"INDUSTRY_TYPE_ID": obj.INDUSTRY || 'Retail',
+ 		"CALLBACK_URL" :config.CALLBACK_URL,
+ 		"INDUSTRY_TYPE_ID": config.INDUSTRY || 'Retail',
  	};
 
 
- 	checksum_lib.genchecksum(paytmParams, config.key, (err, checksum)=>{
+ 	checksum_lib.genchecksum(paytmParams, config.KEY, (err, checksum)=>{
 
  		if(err)
  			return callback(err);
 
- 		if(config.env == 'prod'){
+ 		if(config.ENV == 'prod'){
  			paytmParams.url = 'https://securegw.paytm.in/order/process'
  		}else{
  			paytmParams.url = 'https://securegw-stage.paytm.in/order/process'
@@ -56,7 +56,7 @@
  		}
  	}
 
- 	let isValidChecksum = checksum_lib.verifychecksum(paytmParams, config.key, paytmChecksum);
+ 	let isValidChecksum = checksum_lib.verifychecksum(paytmParams, config.KEY, paytmChecksum);
 
  	if(isValidChecksum) {
  		callback(null, { status : 'verified'})
@@ -71,7 +71,7 @@
  */
  exports.status = (config,data,callback) => {
 
- 	checksum_lib.genchecksum({ 'MID' : config.mid, 'ORDERID' : data },config.key, (err, checksum) =>{
+ 	checksum_lib.genchecksum({ 'MID' : config.mid, 'ORDERID' : data },config.KEY, (err, checksum) =>{
 
  		let post_data = {
  			MID:config.mid,
@@ -81,7 +81,7 @@
 
  		let url = '';
 
- 		if(config.env == 'prod'){
+ 		if(config.ENV == 'prod'){
  			url = 'https://securegw.paytm.in/order/status'
  		}else{
  			url = 'https://securegw-stage.paytm.in/order/status'
