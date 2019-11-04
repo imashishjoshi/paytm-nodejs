@@ -9,7 +9,7 @@ $ npm install paytm-nodejs --save
 
 ## Usage
 
-For creatin Payment
+For Creating Paytm Payment
 
 ```js
 const paytm = require('paytm-nodejs')
