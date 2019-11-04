@@ -104,6 +104,42 @@ const config = {
 // Webhook controller function
 exports.webhook = function(req,res){ 
 
+	paytm.validate(config,req.body,function(err,data){
+		if(err){
+			// handle err
+		}
+
+		if(data.status == 'verified'){
+			// mark payment done in your db
+		}
+	})
+
 }
+```
+
+### For Getting Order Status
+
+```js
+const paytm = require('paytm-nodejs')
+
+const config = {
+	MID : '###############', // Get this from Paytm console
+	KEY : '###############', // Get this from Paytm console
+	ENV : 'dev', // 'dev' for development, 'prod' for production
+	CHANNEL_ID : 'WAP',
+	INDUSTRY : 'Retail',  
+	WEBSITE : 'Default',
+	CALLBACK_URL : 'localhost:8080/paytm/webhook',  // webhook url for verifying payment
+}
+
+
+	paytm.status(config,'your_order_id',function(err,data){
+		if(err){
+			// handle err
+		}
+
+		// data will contain order details
+	})
+
 ```
 
